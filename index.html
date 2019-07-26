@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>test</title>
+	<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+</head>
+<body>
+
+	<div class="container">
+		<div id="mapa"></div>
+	</div>
+
+	<script type="text/javascript">
+		var TORRES;
+		var INCENDIOS;
+		var TORRES_NEW = [];
+		$.ajax({ url: "torres.json"   }).done(function(data) {
+
+			TORRES = data;
+
+			$.ajax({ url: "incendios.json" }).done(function(data) {
+
+				INCENDIOS = data;
+
+				$.each( TORRES.features, function( indexTorre, torre ) {
+					var torreX = torre.geometry.coordinates[0];
+					var torreY = torre.geometry.coordinates[1];
+					var TEMP = [];
+
+					$.each( INCENDIOS.features, function( indexIncendio, incendio ) {
+						var incendioX = incendio.geometry.coordinates[0];
+						var incendioY = incendio.geometry.coordinates[1];
+						var probability = incendio.properties.foiPredictionScore;
+						var DistanceBetweenPoints = getDistanceBetweenPoints(torreX,torreY,  incendioX,incendioY);
+
+
+						TEMP.push({
+							"positionTorre_X": torreX,
+							"positionTorre_Y": torreY,
+							"DistanceBetweenPoints": DistanceBetweenPoints,
+							"probability": probability
+						});
+					});
+
+					var nearestFireFocus = TEMP.reduce(function(res, obj) {
+					    return (obj.DistanceBetweenPoints < res.DistanceBetweenPoints) ? obj : res;
+					});
+
+					TORRES_NEW.push(nearestFireFocus);
+
+					console.log(TEMP);
+					console.log(nearestFireFocus);
+
+				});
+
+				console.log(TORRES_NEW);
+			});
+		});
+
+		function getDistanceBetweenPoints(p1_X, p1_Y, p2_X, p2_Y){
+			//calculo catetos
+			var catetoX = p2_X - p1_X;
+			var catetoY = p2_Y - p1_Y;
+
+			//calculo hipotenusa
+			var hipo = Math.sqrt(Math.pow(catetoX, 2) + Math.pow(catetoY, 2));
+
+			return hipo;
+		}
+
+	</script>
+
+</body>
+</html>

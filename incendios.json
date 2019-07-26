@@ -1,0 +1,85 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "marker-color": "#7e7e7e",
+                "marker-size": "medium",
+                "marker-symbol": "",
+                "foiPredictionScore": 1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -63.17138671875,
+                    -36.853252223440165
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "marker-color": "#7e7e7e",
+                "marker-size": "medium",
+                "marker-symbol": "",
+                "foiPredictionScore": 4
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -61.98486328124999,
+                    -35.94243575255425
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "marker-color": "#7e7e7e",
+                "marker-size": "medium",
+                "marker-symbol": "",
+                "foiPredictionScore": 7
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -60.57861328125,
+                    -35.281500657891186
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "marker-color": "#7e7e7e",
+                "marker-size": "medium",
+                "marker-symbol": "",
+                "foiPredictionScore": 5
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -59.0185546875,
+                    -35.15584570226543
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "marker-color": "#7e7e7e",
+                "marker-size": "medium",
+                "marker-symbol": "",
+                "foiPredictionScore": 2
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -57.87597656249999,
+                    -35.58585159323235
+                ]
+            }
+        }
+    ]
+}
