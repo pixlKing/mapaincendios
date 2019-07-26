@@ -3,11 +3,13 @@
 <head>
 	<title>test</title>
 	<script  src="https://code.jquery.com/jquery-3.4.1.min.js"  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="  crossorigin="anonymous"></script>
+	<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.js'></script>
+	<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.css' rel='stylesheet' />
 </head>
 <body>
 
 	<div class="container">
-		<div id="mapa"></div>
+		<div id="container-mapaincendio---Main--mapContainer" style="height:800px; width:100%"></div>
 	</div>
 
 	<script type="text/javascript">
@@ -43,7 +45,7 @@
 					});
 
 					var nearestFireFocus = TEMP.reduce(function(res, obj) {
-					    return (obj.DistanceBetweenPoints < res.DistanceBetweenPoints) ? obj : res;
+						return (obj.DistanceBetweenPoints < res.DistanceBetweenPoints) ? obj : res;
 					});
 
 					TORRES_NEW.push(nearestFireFocus);
@@ -62,7 +64,6 @@
 			//calculo catetos
 			var catetoX = p2_X - p1_X;
 			var catetoY = p2_Y - p1_Y;
-
 			//calculo hipotenusa
 			var hipo = Math.sqrt(Math.pow(catetoX, 2) + Math.pow(catetoY, 2));
 
@@ -70,6 +71,7 @@
 		}
 
 	</script>
+	<script src='map.js'></script>
 
 </body>
 </html>
