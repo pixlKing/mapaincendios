@@ -23,7 +23,7 @@
                 "marker-color": "#7e7e7e",
                 "marker-size": "medium",
                 "marker-symbol": "",
-                "foiPredictionScore": 4
+                "foiPredictionScore": 50
             },
             "geometry": {
                 "type": "Point",
@@ -39,7 +39,7 @@
                 "marker-color": "#7e7e7e",
                 "marker-size": "medium",
                 "marker-symbol": "",
-                "foiPredictionScore": 7
+                "foiPredictionScore": 70
             },
             "geometry": {
                 "type": "Point",
@@ -55,7 +55,7 @@
                 "marker-color": "#7e7e7e",
                 "marker-size": "medium",
                 "marker-symbol": "",
-                "foiPredictionScore": 5
+                "foiPredictionScore": 81
             },
             "geometry": {
                 "type": "Point",
@@ -71,7 +71,7 @@
                 "marker-color": "#7e7e7e",
                 "marker-size": "medium",
                 "marker-symbol": "",
-                "foiPredictionScore": 2
+                "foiPredictionScore": 100
             },
             "geometry": {
                 "type": "Point",

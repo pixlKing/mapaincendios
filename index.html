@@ -35,6 +35,7 @@
 						var incendioY = incendio.geometry.coordinates[1];
 						var probability = incendio.properties.foiPredictionScore;
 						var DistanceBetweenPoints = getDistanceBetweenPoints(torreX,torreY,  incendioX,incendioY);
+						var textColor = getTextColor(probability);
 
 
 						TEMP.push({
@@ -44,6 +45,7 @@
 							},
 							"type": "Feature",
 							"properties": {
+								"textColor": textColor,
 								"DistanceBetweenPoints": DistanceBetweenPoints,
 								"foiPredictionScore": probability
 							}
@@ -68,6 +70,22 @@
 				createMapLayer(TORRES_NEW);
 			});
 		});
+
+		function getTextColor(value){
+			//Create a color range based on value
+			// ColorRange
+			var critical = "#ff0000";
+			var medium 	 = "#ff5500";
+			var low 	 = "#ffff00";
+
+			if(value > 80){
+				return critical
+			}else if( value >= 50 && value <= 80 ){
+				return medium
+			}else {
+				return low
+			}
+		}
 
 		function createMapLayer(dataMap){
 			console.log("dataMap: ");
@@ -97,6 +115,11 @@
 							"text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
 							"text-offset": [0, 0.6],
 							"text-anchor": "top"
+						},
+						"paint": {
+							"text-color": ['get', 'textColor'],
+							"text-halo-color": "#000000",
+							"text-halo-width": 3
 						}
 					}
 				)
