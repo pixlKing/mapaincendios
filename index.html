@@ -23,6 +23,7 @@
 			$.ajax({ url: "incendios.json" }).done(function(data) {
 
 				INCENDIOS = data;
+				console.log(INCENDIOS);
 
 				$.each( TORRES.features, function( indexTorre, torre ) {
 					var torreX = torre.geometry.coordinates[0];
@@ -37,15 +38,22 @@
 
 
 						TEMP.push({
-							"positionTorre_X": torreX,
-							"positionTorre_Y": torreY,
-							"DistanceBetweenPoints": DistanceBetweenPoints,
-							"probability": probability
+							"geometry": {
+								"type": "Point",
+								"coordinates": [ torreX, torreY ]
+							},
+							"type": "Feature",
+							"properties": {
+								"DistanceBetweenPoints": DistanceBetweenPoints,
+								"foiPredictionScore": probability
+							}
 						});
+
+
 					});
 
 					var nearestFireFocus = TEMP.reduce(function(res, obj) {
-						return (obj.DistanceBetweenPoints < res.DistanceBetweenPoints) ? obj : res;
+						return (obj.properties.DistanceBetweenPoints < res.properties.DistanceBetweenPoints) ? obj : res;
 					});
 
 					TORRES_NEW.push(nearestFireFocus);
@@ -57,8 +65,44 @@
 
 				console.log("Nuevo json mergeado de torres con la probabilidad mas cercana: ");
 				console.log(TORRES_NEW);
+				createMapLayer(TORRES_NEW);
 			});
 		});
+
+		function createMapLayer(dataMap){
+			console.log("dataMap: ");
+			console.log(dataMap);
+			mapboxgl.accessToken = 'pk.eyJ1IjoibWF0dGNhbXBhIiwiYSI6ImNqeWlzZWx3dTBkcm8zZHA1czJ4bnNuamQifQ.XZwmyx7JwQ0RLIgQlpJb1g';
+			var map = new mapboxgl.Map({
+				container: 'container-mapaincendio---Main--mapContainer',
+				style: 'mapbox://styles/mapbox/streets-v11',
+				center: [-60.90173,-33.30103],
+				zoom: 6
+			});
+
+			map.on('load', function () {
+				map.addLayer(
+					{
+						"id": "heatmapPoints",
+						"type": "symbol",
+						"source": {
+							"type": "geojson",
+							"data": {
+							    "type": "FeatureCollection",
+							    "features": dataMap
+							}
+						},
+						"layout": {
+							"text-field": "{foiPredictionScore}",
+							"text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+							"text-offset": [0, 0.6],
+							"text-anchor": "top"
+						}
+					}
+				)
+			});
+
+		}
 
 		function getDistanceBetweenPoints(p1_X, p1_Y, p2_X, p2_Y){
 			//calculo catetos
@@ -71,7 +115,7 @@
 		}
 
 	</script>
-	<script src='map.js'></script>
+	<!-- <script src='map.js'></script> -->
 
 </body>
 </html>
